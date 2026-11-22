@@ -1,0 +1,111 @@
+{
+  "project": "Credit Card Fraud Detection - Task 3",
+  "model_name": "LightGBM",
+  "model_class": "LGBMClassifier",
+  "target": "is_fraud",
+  "positive_class": "1 = fraud",
+  "input_features": [
+    "merchant",
+    "category",
+    "amt",
+    "gender",
+    "city",
+    "state",
+    "zip",
+    "lat",
+    "long",
+    "city_pop",
+    "job",
+    "merch_lat",
+    "merch_long",
+    "trans_hour",
+    "trans_day",
+    "customer_age",
+    "distance_km"
+  ],
+  "numerical_features": [
+    "amt",
+    "zip",
+    "lat",
+    "long",
+    "city_pop",
+    "merch_lat",
+    "merch_long",
+    "trans_hour",
+    "trans_day",
+    "customer_age",
+    "distance_km"
+  ],
+  "categorical_features": [
+    "merchant",
+    "category",
+    "gender",
+    "city",
+    "state",
+    "job"
+  ],
+  "n_processed_features": 2159,
+  "dropped_raw_columns": [
+    "Unnamed: 0",
+    "cc_num",
+    "trans_num",
+    "first",
+    "last",
+    "street",
+    "trans_date_trans_time",
+    "dob",
+    "unix_time"
+  ],
+  "engineered_features": [
+    "trans_hour",
+    "trans_day",
+    "customer_age",
+    "distance_km"
+  ],
+  "hyperparameters": {
+    "n_estimators": 800,
+    "learning_rate": 0.03313073862781126,
+    "num_leaves": 31,
+    "min_child_samples": 100,
+    "subsample": 0.85,
+    "colsample_bytree": 0.8,
+    "reg_lambda": 1.0,
+    "scale_pos_weight": 10
+  },
+  "decision_threshold": 0.7396869252618204,
+  "selection_metric": "average_precision (5-fold StratifiedKFold CV on 250,000-row training subsample)",
+  "cv_metrics_mean": {
+    "avg_precision": 0.8881957710297428,
+    "roc_auc": 0.9946408360073582,
+    "f1": 0.837548100611283,
+    "precision": 0.8810545345541279,
+    "recall": 0.7988855745137811,
+    "accuracy": 0.9982080000000002
+  },
+  "cv_metrics_std": {
+    "avg_precision": 0.013664352727638412,
+    "roc_auc": 0.0021026398594990894,
+    "f1": 0.011312455954020934,
+    "precision": 0.018006550960340654,
+    "recall": 0.026779672244059756,
+    "accuracy": 0.0001035374328443739
+  },
+  "test_metrics": {
+    "avg_precision": 0.8444306461906231,
+    "roc_auc": 0.9961942949019653,
+    "f1": 0.7977582846003899,
+    "precision": 0.8356304236855538,
+    "recall": 0.7631701631701632,
+    "accuracy": 0.9985064394055269
+  },
+  "train_rows_final_fit": 1296675,
+  "final_fit_time_s": 38.17,
+  "library_versions": {
+    "python": "3.13.18",
+    "pandas": "3.0.5",
+    "scikit-learn": "1.9.1",
+    "lightgbm": "4.7.0",
+    "joblib": "1.6.0"
+  },
+  "inference": "raw transaction rows -> prepare_features() (Task 2 create_features + drop columns) -> pipeline.predict_proba(X)[:, 1] -> fraud if probability >= decision_threshold"
+}
